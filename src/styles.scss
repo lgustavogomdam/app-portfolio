@@ -1,1 +1,58 @@
-/* You can add global styles to this file, and also import other style files */
+@import "./assets/themes/mytheme/dark/theme.scss";
+@import "primeicons/primeicons.css";
+@import "primeng/resources/primeng.css";
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+html,body {
+  height: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  box-sizing: border-box;
+  font-family:  'Montserrat', sans-serif !important;
+}
+
+// color
+.bg-black-alpha-100{
+  background-color: black;
+}
+
+// Sizing
+
+.width-70{
+  width: 70% !important;
+}
+
+.width-30{
+  width: 30% !important;
+}
+
+//Barra de Rolagem
+
+/* Largura da barra de rolagem */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Cor de fundo da barra de rolagem */
+::-webkit-scrollbar-track {
+  background-color: $bgPrimaryColor;
+}
+
+/* Cor do "track" (a parte da barra de rolagem que não está coberta pelo "thumb") */
+::-webkit-scrollbar-track-piece {
+  background-color: #ffffff54;
+}
+
+/* Cor do "thumb" (a parte da barra de rolagem que você move) */
+::-webkit-scrollbar-thumb {
+  border-radius: 15px;
+  background-color: $primaryColor;
+}
+
+/* Cor do "thumb" ao passar o mouse sobre ele */
+::-webkit-scrollbar-thumb:hover {
+  background-color:rgba(254, 0, 93, 0.908);
+}
