@@ -1,1 +1,144 @@
-<p>home works!</p>
+<header>
+  <div class="w-full h-full flex flex-nowrap header align-items-center">
+    <div class="width-30 pl-5 flex flex-nowrap align-items-center">
+      @if (mostrarImagem) {
+        <img
+          src="../assets/img/lggdev.png"
+          alt="LGGDev Logotipo"
+          class="max-h-full w-7rem fadein animation-ease-in animation-duration-800"
+        />
+      }
+    </div>
+    <nav class="width-70 flex flex-nowrap justify-content-end gap-3 pr-3">
+      @for (item of items; track $index) {
+      <a
+        href="{{ item.link }}"
+        class="no-underline"
+        [ngStyle]="{ color: item.clicked ? '#00a7c1' : 'white' }"
+        (click)="mudarLink($index)"
+      >
+        <i class="{{ item.icon }}"></i>
+        {{ item.label }}
+      </a>
+      }
+    </nav>
+  </div>
+</header>
+
+<!-- TODO: Consertar os padding-top responsivo dos sections -->
+<main class="container-fluid">
+
+  <!-- HOME -->
+  <section id="home" class="w-full flex-column bg-repeat">
+    <div class="width-full pt-7 md:pt-8 flex flex-column align-items-center justify-content-center gap-2 ">
+      <img
+        src="../assets/img/lggdev.png"
+        alt="LGGDev Logotipo"
+        class="max-h-full max-w-full pb-5 w-5 fadein animation-ease-in-out animation-duration-300 animation-iteration-2"
+      />
+      <p class="text-lg">Luiz Gustavo Gomes Damasceno</p>
+      <p class="m-0 fadein animation-ease-in-out animation-duration-3000 animation-iteration-infinite text-base text-center md:text-3xl pb-5">{{textoHome}}</p>
+      <div class="flex gap-4 w-6 border-top-2 border-primary pt-6 justify-content-center">
+        <a href="https://www.linkedin.com/in/lgustavogomdam/" target="_blank">
+          <i class="pi pi-linkedin text-primary text-2xl md:text-5xl">
+          </i>
+        </a>
+        <a href="https://github.com/lgustavogomdam" target="_blank">
+          <i class="pi pi-github text-primary text-2xl md:text-5xl">
+          </i>
+        </a>
+        <a href="https://www.instagram.com/lggdev/" target="_blank">
+          <i class="pi pi-instagram text-primary text-2xl md:text-5xl">
+          </i>
+        </a>
+        <a href="https://www.youtube.com/@lggdev" target="_blank">
+          <i class="pi pi-youtube text-primary text-2xl md:text-5xl">
+          </i>
+        </a>
+        <a href="mailto:lgustavogomdam@gmail.com?subject=Contato+Portf%C3%B3lio&body=Ol%C3%A1+Luiz+Gustavo,+vi+seu+portf%C3%B3lio+e+me+gerou+interesse..." target="_blank">
+          <i class="pi pi-inbox text-primary text-2xl md:text-5xl">
+          </i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOBRE -->
+  <section id="sobre" class="w-full flex flex-wrap">
+    <div class="col-12 lg:col-6 pt-8 md:pt-3 pl-5 flex align-items-start flex-column justify-content-start  ">
+      <h1 class="font-semibold text-5xl line-height-2 text-primary">Olá, eu sou o Luiz Gustavo</h1>
+      <h3 class="text-primary font-medium text-lg">Backend Software Engineer</h3>
+      <p class="text-xs sm:text-base md:text-lg text-justify m-0 pr-5 line-height-3">
+        Tenho 22 anos, brasileiro (natural de Minas) e sou estudante de Sistemas de Informação no Instituto Federal do Espírito Santo (Campus Colatina), atualmente estou no 7º Período do meu curso e estou finalizando meu TCC sobre Rede Neural e NLP. Sou apaixonado por tecnologia de maneira geral e estou me especializando em desenvolvimento web e tenho buscado sempre aprimorar meus conhecimentos seja na minha área de especialização (Back-End) ou demais áreas como Mobile ou Front-End que também são conhecimentos que julgo importantes. Sempre procuro formas de me superar e captar ainda mais conhecimento (já que nunca é demais hahah), gosto bastante de desafios e encaro eles como uma forma de crescer seja profissionalmente ou pessoalmente. Me mantenho sempre atualizado seja com cursos pagos ou conteúdos gratuitos, afinal o importante é não parar.
+        No meu tempo livre costumo ir à academia, sair em bons lugares, viajar ou passar tempo com amigos e família.
+      </p>
+    </div>
+    <div class="col-12 lg:col-6 align-items-center">
+      <img src="../assets/img/fotopessoal.png" alt="Foto pessoal" class="max-h-full text-center max-w-full">
+    </div>
+  </section>
+
+  <!-- EXPERIENCIA -->
+  <section id="experiencia" class="w-full">
+    <p class="text-base md:text-5xl font-bold pt-5 pl-5">Experiência Profissional</p>
+    <p-accordion [activeIndex]="0" styleClass="pt-5 pl-5 pr-5 text-2xl">
+      <p-accordionTab header="Desenvolvedor Fullstack | Java - Angular">
+        <p class="text-base font-bold">Fundação de Amparo à Pesquisa do Estado do Espírito Santo (FAPES - TJES)</p>
+        <p class="text-base">10/2022 - o momento</p>
+        <p class="text-sm">
+          Atualmente atuo no projeto SIGEX do TJES ( <em>Tribunal de Justiça do Espírito Santo</em> ) em pareceria com a FAPES.<br>
+          Este projeto consiste na criação de um sistema Web para controle interno dos cartórios do Espírito Santo em conjunto com seus acervos e propriedades, no entanto também possui url's públicas.<br>
+        </p>
+        <p class="text-base font-bold">Atividades:</p>
+        <p-accordion [activeIndex]="0" styleClass="pt-1 pr-5 text-base">
+          <p-accordionTab header="Back-End">
+            <ul class="pl-5 text-base font-light flex flex-column gap-2">
+              <li>Utilização e configuração do gerador Telosys.</li>
+              <li>Desenvolvimento de API REST/RESTful com Java e Spring Boot.</li>
+              <li>Versionamento de código com Git e GitLab/GitHub.</li>
+              <li>Containerização de aplicações com Docker.</li>
+              <li>Testes automatizados com Rest Assured, JUnit5 e Mockito.</li>
+              <li>Acesso ao banco de dados PostgreSQL e manipulação de dados com Migrations.</li>
+              <li>Documentação de API com Swagger.</li>
+              <li>Implementação de Token de acesso com JWT</li>
+            </ul>
+          </p-accordionTab>
+          <p-accordionTab header="Front-End">
+            <ul class="pl-5 text-base font-light flex flex-column gap-2">
+              <li>Desenvolvimento de interfaces responsivas com framework Angular.</li>
+              <li>Programação Reativa com RxJS.</li>
+              <li>Construção de componentes e formularios para aplicação SPA.</li>
+              <li>Configuração de Rotas e Guarda de Rotas no Angular.</li>
+              <li>Testes com Cypress</li>
+              <li>Uso de frameworks CSS como PrimeNG, Bootstrap e Material.</li>
+            </ul>
+          </p-accordionTab>
+        </p-accordion>
+      </p-accordionTab>
+  </p-accordion>
+  </section>
+
+  <!-- PROJETOS -->
+  <section id="projetos" class="w-full flex flex-column">
+
+    <p class="text-base md:text-5xl font-bold pt-5 pl-5">Projetos</p>
+    <div class="max-w-full flex flex-wrap pl-4">
+      @for (repo of repositories; track $index) {
+        <p-card header="{{repo.name}}" subheader="@lgustavogomdam" class="col-12 md:col-6 lg:col-4 pt-5 cursor-pointer" (click)="navToRepository(repo)">
+          <p>{{repo.description}}</p>
+          <ng-template pTemplate="footer">
+            <div class="flex flex-row flex-wrap gap-2 justify-content-start">
+              @if (repo.techs) {
+                @for (tech of repo.techs; track $index) {
+                 <div class="border-round-md bg-primary text-black-alpha-100 p-1 text-xs md:text-sm">
+                  <p class="m-0 ">{{tech.name}}</p>
+                </div>
+                }
+              }
+            </div>
+          </ng-template>
+        </p-card>
+      }
+    </div>
+  </section>
+</main>
