@@ -13,7 +13,7 @@
       @if(larguraDaTelaMaiorQue510){
         @for (item of items; track $index) {
           <a
-            class="no-underline text-xs"
+            class="no-underline text-xs cursor-pointer"
             [ngStyle]="{ color: item.clicked ? '#00a7c1' : 'white' }"
             (click)="mudarLink($index)"
           >
@@ -26,7 +26,7 @@
         @if (mostrarMenu) {
           <div class="menu p-2 fadeinright animation-duration-250">
             @for (item of items; track $index) {
-              <div class="menu-item flex p-2">
+              <div class="menu-item flex p-2 cursor-pointer">
                 <a
                 class="no-underline text-xs"
                 [ngStyle]="{ color: item.clicked ? '#00a7c1' : 'white' }"
