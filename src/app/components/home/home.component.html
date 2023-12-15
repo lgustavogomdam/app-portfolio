@@ -10,17 +10,38 @@
       }
     </div>
     <nav class="width-70 flex flex-nowrap justify-content-end gap-3 pr-3">
-      @for (item of items; track $index) {
-      <a
-        href="{{ item.link }}"
-        class="no-underline"
-        [ngStyle]="{ color: item.clicked ? '#00a7c1' : 'white' }"
-        (click)="mudarLink($index)"
-      >
-        <i class="{{ item.icon }}"></i>
-        {{ item.label }}
-      </a>
+      @if(larguraDaTelaMaiorQue510){
+        @for (item of items; track $index) {
+          <a
+            class="no-underline text-xs"
+            [ngStyle]="{ color: item.clicked ? '#00a7c1' : 'white' }"
+            (click)="mudarLink($index)"
+          >
+            <i class="{{ item.menu.icon }}"></i>
+            {{ item.menu.label }}
+          </a>
+        }
+      }@else {
+        <i class="pi pi-bars text-lg font-bold cursor-pointer pr-2" (click)="mostrarMenu = !mostrarMenu"></i>
+        @if (mostrarMenu) {
+          <div class="menu p-2 fadeinright animation-duration-250">
+            @for (item of items; track $index) {
+              <div class="menu-item flex p-2">
+                <a
+                class="no-underline text-xs"
+                [ngStyle]="{ color: item.clicked ? '#00a7c1' : 'white' }"
+                (click)="mudarLink($index)"
+                >
+                  <i class="{{ item.menu.icon }}"></i>
+                  {{ item.menu.label }}
+                </a>
+              </div>
+
+            }
+          </div>
+        }
       }
+
     </nav>
   </div>
 </header>
@@ -30,7 +51,7 @@
 
   <!-- HOME -->
   <section id="home" class="w-full flex-column bg-repeat">
-    <div class="width-full pt-7 md:pt-8 flex flex-column align-items-center justify-content-center gap-2 ">
+    <div class="width-full pt-6 md:pt-8 flex flex-column align-items-center justify-content-center gap-2 ">
       <img
         src="../assets/img/lggdev.png"
         alt="LGGDev Logotipo"
@@ -65,7 +86,7 @@
 
   <!-- SOBRE -->
   <section id="sobre" class="w-full flex flex-wrap">
-    <div class="col-12 lg:col-6 pt-8 md:pt-3 pl-5 flex align-items-start flex-column justify-content-start  ">
+    <div class="col-12 lg:col-6 pt-5 md:pt-3 pl-5 flex align-items-start flex-column justify-content-start  ">
       <h1 class="font-semibold text-5xl line-height-2 text-primary">Olá, eu sou o Luiz Gustavo</h1>
       <h3 class="text-primary font-medium text-lg">Backend Software Engineer</h3>
       <p class="text-xs sm:text-base md:text-lg text-justify m-0 pr-5 line-height-3">
@@ -80,7 +101,7 @@
 
   <!-- EXPERIENCIA -->
   <section id="experiencia" class="w-full">
-    <p class="text-base md:text-5xl font-bold pt-5 pl-5">Experiência Profissional</p>
+    <p class="text-base md:text-5xl font-bold pt-1 md:pt-3 pl-5">Experiência Profissional</p>
     <p-accordion [activeIndex]="0" styleClass="pt-5 pl-5 pr-5 text-2xl">
       <p-accordionTab header="Desenvolvedor Fullstack | Java - Angular">
         <p class="text-base font-bold">Fundação de Amparo à Pesquisa do Estado do Espírito Santo (FAPES - TJES)</p>
@@ -120,8 +141,7 @@
 
   <!-- PROJETOS -->
   <section id="projetos" class="w-full flex flex-column">
-
-    <p class="text-base md:text-5xl font-bold pt-5 pl-5">Projetos</p>
+    <p class="text-base md:text-5xl font-bold pt-5 md:pt-5 pl-5">Projetos</p>
     <div class="max-w-full flex flex-wrap pl-4">
       @for (repo of repositories; track $index) {
         <p-card header="{{repo.name}}" subheader="@lgustavogomdam" class="col-12 md:col-6 lg:col-4 pt-5 cursor-pointer" (click)="navToRepository(repo)">

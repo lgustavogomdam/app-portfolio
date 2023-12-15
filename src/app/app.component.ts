@@ -1,17 +1,8 @@
-import { CardModule } from 'primeng/card';
 import { CommonModule } from '@angular/common';
-import { Component, HostListener, Inject } from '@angular/core';
-import { Router, RouterModule, RouterOutlet } from '@angular/router';
-import { AccordionModule } from 'primeng/accordion';
-import { PrimeNGConfig } from 'primeng/api';
-import { ButtonModule } from 'primeng/button';
-import { TabMenuModule } from 'primeng/tabmenu';
-import { ToolbarModule } from 'primeng/toolbar';
-import { interval, Subscription } from 'rxjs';
+import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 
-import { MenuItem } from './models/menu-item';
 import { SharedModule } from './shared/shared.module';
-import { Repository } from './models/repository';
 
 @Component({
   selector: 'app-root',

@@ -2,16 +2,17 @@ import { CommonModule } from '@angular/common';
 import { Component, HostListener } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { AccordionModule } from 'primeng/accordion';
+import { MenuItem, PrimeNGConfig } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
+import { MenuModule } from 'primeng/menu';
 import { TabMenuModule } from 'primeng/tabmenu';
 import { ToolbarModule } from 'primeng/toolbar';
+import { interval, Subscription } from 'rxjs';
 
-import { SharedModule } from '../../shared/shared.module';
-import { MenuItem } from '../../models/menu-item';
+import { MeuMenuItem } from '../../models/meu-menu-item';
 import { Repository } from '../../models/repository';
-import { Subscription, interval } from 'rxjs';
-import { PrimeNGConfig } from 'primeng/api';
+import { SharedModule } from '../../shared/shared.module';
 
 @Component({
   selector: 'app-home',
@@ -24,7 +25,8 @@ import { PrimeNGConfig } from 'primeng/api';
     ButtonModule,
     TabMenuModule,
     AccordionModule,
-    CardModule
+    CardModule,
+    MenuModule
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
@@ -34,8 +36,11 @@ export class HomeComponent {
   //Readonly
   textoHome: string = 'BackEnd Software Engineer';
   mostrarImagem: boolean = false;
-  items!: MenuItem[];
+  mostrarMenu: boolean = false;
+  items!: MeuMenuItem[];
   repositories!: Repository[];
+  larguraDaTelaMaiorQue510: boolean = window.innerWidth > 550;
+  itemsMenu: MenuItem[] = [];
 
   //IoC
   private subscription!: Subscription;
@@ -44,6 +49,11 @@ export class HomeComponent {
     private primengConfig: PrimeNGConfig,
     private router: Router
   ) {}
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event): void {
+    this.larguraDaTelaMaiorQue510 = window.innerWidth > 550;
+  }
 
   @HostListener('window:scroll', ['$event'])
   onWindowScroll() {
@@ -54,12 +64,44 @@ export class HomeComponent {
     this.mostrarImagem = scrollPosition >= window.innerHeight - 100;
   }
 
-  mudarLink(indexElement: any) {
+  mudarLink(indexElement: number) {
     this.items.forEach((elemento, index) => {
       if (index == indexElement) {
         elemento.clicked = true;
       } else {
         elemento.clicked = false;
+      }
+
+      let elementoByID;
+      switch(indexElement){
+        case 0:
+          elementoByID = document.getElementById('home');
+
+          if (elementoByID) {
+            elementoByID.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        break;
+        case 1:
+          elementoByID = document.getElementById('sobre');
+
+          if (elementoByID) {
+            elementoByID.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        break;
+        case 2:
+          elementoByID = document.getElementById('experiencia');
+
+          if (elementoByID) {
+            elementoByID.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        break;
+        default:
+          elementoByID = document.getElementById('projetos');
+
+          if (elementoByID) {
+            elementoByID.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        break;
       }
     });
   }
@@ -136,21 +178,43 @@ export class HomeComponent {
 
     // Items
     this.items = [
-      { label: 'Home', icon: 'pi pi-fw pi-home', link: '#home', clicked: true },
-      { label: 'Sobre', icon: 'pi pi-user', link: '#sobre', clicked: false },
+      { menu:
+        {
+          label: 'Home',
+          icon: 'pi pi-fw pi-home',
+        },
+        clicked: true
+      },
       {
-        label: 'Experiência',
-        icon: 'pi pi-briefcase',
-        link: '#experiencia',
+        menu:
+        {
+          label: 'Sobre',
+          icon: 'pi pi-user',
+        },
+        clicked: false
+      },
+      {
+        menu:
+        {
+          label: 'Experiência',
+          icon: 'pi pi-briefcase',
+        },
         clicked: false,
       },
       {
-        label: 'Projetos',
-        icon: 'pi pi-bolt',
-        link: '#projetos',
+        menu:
+        {
+          label: 'Projetos',
+          icon: 'pi pi-bolt',
+          url: '#projetos',
+        },
         clicked: false,
       }
     ];
+
+    this.items.forEach(elemento=>{
+      this.itemsMenu?.push(elemento.menu);
+    })
 
     // Inicializa o texto
     this.textoHome = 'Backend Software Engineer';
